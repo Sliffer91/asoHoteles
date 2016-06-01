@@ -9,7 +9,7 @@ import ec.edu.espe.ecutravel.asohoteles.controllers.HotelController;
 import ec.edu.espe.ecutravel.asohoteles.controllers.TransaccionReservadaController;
 import ec.edu.espe.ecutravel.asohoteles.entities.Hotel;
 import ec.edu.espe.ecutravel.asohoteles.entities.TransaccionReservada;
-import hotel1consumer.Habitacion;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
@@ -40,21 +40,21 @@ public class AsoHotelesWS {
     }
     
     @WebMethod(operationName = "retrieveHabitaciones")
-    public List<Habitacion> retrieveHabitaciones(
+    public List<Object> retrieveHabitaciones(
             @WebParam(name = "idHotel") Integer idHotel, 
             @WebParam(name = "fechaInicio") String fechaInicio, 
             @WebParam(name = "fechaFinal") String fechaFinal) {
         
-        List<Habitacion> temp = null;
+        List<Object> temp = new ArrayList<>();
         switch (idHotel){
             case 1:
-               temp = hotel1consumer.Hotel1WSConsumer.buscarHabitacionesEnFechas(fechaInicio, fechaFinal);                       
+               temp.add(hotel1consumer.Hotel1WSConsumer.buscarHabitacionesEnFechas(fechaInicio, fechaFinal));                       
                 break;
             case 2:
-                temp = hotel2consumer.Hotel2WSConsumer.buscarHabitacionesEnFechas(fechaInicio, fechaFinal);
+                temp.add(hotel2consumer.Hotel2WSConsumer.buscarHabitacionesEnFechas(fechaInicio, fechaFinal));
                 break;
             case 3:
-                temp = hotel3consumer.Hotel3WSConsumer.buscarHabitacionesEnFechas(fechaInicio, fechaFinal);
+                temp.add(hotel3consumer.Hotel3WSConsumer.buscarHabitacionesEnFechas(fechaInicio, fechaFinal));
                 break;
             default: temp = null;
                 break;
@@ -69,5 +69,5 @@ public class AsoHotelesWS {
     @WebMethod(operationName = "getTransaccionReservada")
     public List<TransaccionReservada> getTransaccionReservada() {
         return ejbRef.getTransaccionReservada();
-    }
+    }           
 }
