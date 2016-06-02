@@ -40,21 +40,21 @@ public class AsoHotelesWS {
     }
     
     @WebMethod(operationName = "retrieveHabitaciones")
-    public List<Object> retrieveHabitaciones(
+    public List<ec.edu.espe.ecutravel.hotel.ws.Habitacion> retrieveHabitaciones(
             @WebParam(name = "idHotel") Integer idHotel, 
             @WebParam(name = "fechaInicio") String fechaInicio, 
             @WebParam(name = "fechaFinal") String fechaFinal) {
         
-        List<Object> temp = new ArrayList<>();
+        List<ec.edu.espe.ecutravel.hotel.ws.Habitacion> temp = new ArrayList<>();
         switch (idHotel){
             case 1:
-               temp.add(hotel1consumer.Hotel1WSConsumer.buscarHabitacionesEnFechas(fechaInicio, fechaFinal));                       
+               temp=hotel1consumer.Hotel1WSConsumer.buscarHabitacionesEnFechas(fechaInicio,fechaFinal);                       
                 break;
             case 2:
-                temp.add(hotel2consumer.Hotel2WSConsumer.buscarHabitacionesEnFechas(fechaInicio, fechaFinal));
+                temp=hotel2consumer.Hotel2WSConsumer.buscarHabitacionesEnFechas(fechaInicio, fechaFinal);
                 break;
             case 3:
-                temp.add(hotel3consumer.Hotel3WSConsumer.buscarHabitacionesEnFechas(fechaInicio, fechaFinal));
+                temp=hotel3consumer.Hotel3WSConsumer.buscarHabitacionesEnFechas(fechaInicio, fechaFinal);
                 break;
             default: temp = null;
                 break;
